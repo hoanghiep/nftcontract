@@ -1,9 +1,4 @@
 //SPDX-License-Identifier: MIT
-/**
- *Submitted for verification at snowtrace.io on 2022-04-05
-*/
-
-/* GoldMine - Mine Gold, Earn AVAX. Repeat - Start mining now! https://www.goldmine.money/ */
 
 library SafeMath {
     /**
