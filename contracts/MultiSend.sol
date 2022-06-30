@@ -532,7 +532,7 @@ contract MultiSend is Ownable{
         uint256 amount;
     }
 
-    uint256 public fee = 10000000000000;//0.00001 ETH
+    uint256 public fee = 0;//0.00001 ETH
 
     function sendFixed(address[] memory receivers, uint256 amount)  public payable {
         require(msg.value >= SafeMath.add(fee, amount.mul(receivers.length)), "MultiSend:: not enough ether");
