@@ -1309,7 +1309,7 @@ contract Sale1v3 is ERC721A, IERC2981, Ownable {
 
     uint256 public whitelistMintRemains = 0;
 
-    uint public royalty = 250;//2.5%
+    uint public royalty = 500;//2.5%
 
     // = 0 if there are no free tokens
     // = maxTokensPerTx if free all
@@ -1317,7 +1317,8 @@ contract Sale1v3 is ERC721A, IERC2981, Ownable {
 
     enum TokenURIMode {
         MODE_ONE,
-        MODE_TWO
+        MODE_TWO,
+        MODE_THREE
     }
 
     TokenURIMode private tokenUriMode = TokenURIMode.MODE_ONE;
@@ -1429,7 +1430,7 @@ contract Sale1v3 is ERC721A, IERC2981, Ownable {
               Strings.toString(_tokenId)
             )
           ) : "";
-        } else {
+        } else if (tokenUriMode == TokenURIMode.MODE_ONE) {
           return bytes(baseURI).length > 0 ? string(
             abi.encodePacked(
               baseURI,
@@ -1437,14 +1438,19 @@ contract Sale1v3 is ERC721A, IERC2981, Ownable {
               ".json"
             )
           ) : "";
+        } else if(tokenUriMode == TokenURIMode.MODE_THREE){
+          return baseURI;
         }
+        return "";
     }
 
     function setTokenURIMode(uint256 mode) external onlyOwner {
         if (mode == 2) {
             tokenUriMode = TokenURIMode.MODE_TWO;
-        } else {
+        } else if (mode == 1) {
             tokenUriMode = TokenURIMode.MODE_ONE;
+        } else{
+            tokenUriMode = TokenURIMode.MODE_THREE;
         }
     }
 
